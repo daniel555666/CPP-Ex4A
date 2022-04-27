@@ -1,0 +1,106 @@
+daniel@DESKTOP-PRGFOMP:/mnt/c/CppFiles/coup-a$ bash grade
+--- 0 seconds
+
+
+### Cleaning old files ###
+rm -f *.o demo test
+
+
+### Check 1: our demo program should compile with your class
+! timeout 20 make -j8 -f Makefile demo
+clang++  -std=c++2a -Werror -Wsign-conversion --compile Demo.cpp -o Demo.o
+clang++  -std=c++2a -Werror -Wsign-conversion --compile Game.cpp -o Game.o
+clang++  -std=c++2a -Werror -Wsign-conversion --compile Player.cpp -o Player.o
+clang++  -std=c++2a -Werror -Wsign-conversion --compile Duke.cpp -o Duke.o
+clang++  -std=c++2a -Werror -Wsign-conversion --compile Assassin.cpp -o Assassin.o
+clang++  -std=c++2a -Werror -Wsign-conversion --compile Ambassador.cpp -o Ambassador.o
+clang++  -std=c++2a -Werror -Wsign-conversion --compile Captain.cpp -o Captain.o
+clang++  -std=c++2a -Werror -Wsign-conversion --compile Contessa.cpp -o Contessa.o
+clang++  -std=c++2a -Werror -Wsign-conversion Demo.o Game.o Player.o Duke.o Assassin.o Ambassador.o Captain.o Contessa.o -o demo
+--- 1 seconds
+### Score 1: 100
+
+
+### Check 2: our demo program should run without errors
+! timeout 20 ./demo
+Moshe
+Yossi
+Meirav
+Reut
+Gilad
+need to fill
+not your turn,dont cheat
+not your turn,dont cheat
+2
+3
+not your turn,dont cheat
+not your turn,dont cheat
+3
+Moshe
+Yossi
+Meirav
+Reut
+Gilad
+not your turn,dont cheat
+Moshe
+Yossi
+Meirav
+Reut
+Gilad
+--- 1 seconds
+### Score 2: 100
+
+
+### Check 3: your test should compile
+! timeout 20 make -j8 -f Makefile test
+clang++  -std=c++2a -Werror -Wsign-conversion --compile TestCounter.cpp -o TestCounter.o
+clang++  -std=c++2a -Werror -Wsign-conversion --compile Test.cpp -o Test.o
+clang++  -std=c++2a -Werror -Wsign-conversion TestCounter.o Test.o Game.o Player.o Duke.o Assassin.o Ambassador.o Captain.o Contessa.o -o test
+--- 4 seconds
+### Score 3: 100
+
+
+### Check 4: you should write some new tests
+! timeout 20 ./test
+[doctest] doctest version is "2.3.7"
+[doctest] run with "--help" for options
+===============================================================================
+Test.cpp:17:
+TEST CASE:  check income,foreign_aid,coins functions and Duke block function
+
+Test.cpp:45: ERROR: CHECK( player3.coins() == 100 ) is NOT correct!
+  values: CHECK( 300 == 100 )
+
+Test.cpp:46: ERROR: CHECK( player4.coins() == 100 ) is NOT correct!
+  values: CHECK( 300 == 100 )
+
+not your turn,dont cheat
+===============================================================================
+Test.cpp:50:
+TEST CASE:  check throw when play not in your turn
+
+Test.cpp:61: ERROR: CHECK_THROWS( player2.income() ) did NOT throw at all!
+
+not your turn,dont cheat
+Test.cpp:64: ERROR: CHECK_THROWS( player4.income() ) did NOT throw at all!
+
+not your turn,dont cheat
+Test.cpp:69: ERROR: CHECK_THROWS( player2.income() ) did NOT throw at all!
+
+===============================================================================
+Test.cpp:72:
+TEST CASE:  check you dont allow players with the same name 
+
+Test.cpp:89: ERROR: CHECK( game_3.playerList.at(i).name != game_3.playerList.at(j).name ) is NOT correct!
+  values: CHECK( avi != avi )
+
+Test.cpp:89: ERROR: CHECK( game_3.playerList.at(i).name != game_3.playerList.at(j).name ) is NOT correct!
+  values: CHECK( Gilad != Gilad )
+
+--- 4 seconds
+### Score 4: 100
+
+
+Grade: 100
+
+daniel@DESKTOP-PRGFOMP:/mnt/c/CppFiles/coup-a$
